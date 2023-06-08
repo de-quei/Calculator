@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">RelativeLayout</string>
+    <string name="btn_plus">PLUS</string>
+    <string name="btn_minus">MINUS</string>
+    <string name="btn_multiply">MULTIPLY</string>
+    <string name="btn_divide">DIVIDE</string>
+    <string name="text_result">RESULT : </string>
+</resources>
