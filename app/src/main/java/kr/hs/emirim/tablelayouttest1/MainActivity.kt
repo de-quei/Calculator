@@ -3,13 +3,14 @@ package kr.hs.emirim.tablelayouttest1
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View.OnClickListener
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import kr.hs.emirim.relativelayout.R
 
 class MainActivity : AppCompatActivity() {
-
     lateinit internal var edit1 : EditText
     lateinit internal var edit2 : EditText
     lateinit internal var btnPlus : Button
@@ -34,5 +35,36 @@ class MainActivity : AppCompatActivity() {
         btnMinus = findViewById(R.id.btnMinus)
         btnMultiply = findViewById(R.id.btnMultiply)
         btnDivide = findViewById(R.id.btnDivide)
+
+        for(i in 0 until btnIds.size step 1){
+            btns.add(findViewById(btnIds[i]))
+        }
+
+        for(i in 0 until btnIds.size-1 step 1){
+            btns[i].setOnClickListener{
+                if(edit1.isFocused){
+                    num1 = edit1.text.toString() + btns[i].text.toString()
+                    edit1.setText(num1)
+                }else if(edit1.isFocused){
+                    num2 = edit2.text.toString() + btns[i].text.toString()
+                    edit2.setText(num2)
+                }else{
+                    Toast.makeText(applicationContext, "입력할 곳에 포커스를 먼저 주십시오.", Toast.LENGTH_SHORT)
+                }
+            }
+        }
+    }
+    var btnListener = OnClickListener{
+        num1 = edit1.text.toString();
+        num2 = edit2.text.toString();
+
+        when(it.id){
+            R.id.btnPlus -> result = num1.toInt() + num2.toInt()
+            R.id.btnMinus -> result = num1.toInt() - num2.toInt()
+            R.id.btnMultiply -> result = num1.toInt() * num2.toInt()
+            R.id.btnDivide -> result = num1.toInt() / num2.toInt()
+        }
+        textResult.setText(R.string.text_result)
+        textResult.append(result.toString())
     }
 }
